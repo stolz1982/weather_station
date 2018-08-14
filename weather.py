@@ -39,10 +39,19 @@ p_status = p.wait()
 
 #1534271542:26.05:56:21.00:77:i:i:i:i:i:i:i:i:1006.6:i:5:0:11:1.7:1.4:19.2:76
 DT,TIN,HIN,TOUT,HOUT,T2,H2,T3,H3,T4,H4,T5,H5,PRESS,UV,FC,STORM,WD,WS,WG,WC,RC = output.split(":")
-print "T0: ", TIN
+print "TIN: ", TIN
+print "HIN0: ", HIN
+print "TOUT: ", TOUT
+print "HOUT: ", HOUT
+print "PRESS: ", PRESS
+print "WIND DIRECTION: ", WD
+print "WIND SPEED: ", WS
+print "WIND GUST: ", WG
+print "WIND CHILL: ", WC
+print "RAIN COUNTER: ", RC
 
-scope = ['https://spreadsheets.google.com/feeds','https://www.googleapis.com/auth/drive']
-creds = ServiceAccountCredentials.from_json_keyfile_name('rpi_googlesheet.json', scope) # rpi_$
-client = gspread.authorize(creds)
-sheet = client.open('Remote Monitoring')  # Google Spreadsheet name 'Remote Monitoring'
-worksheet = sheet.worksheet("Weather") # Worksheet name 'Weather'
+#scope = ['https://spreadsheets.google.com/feeds','https://www.googleapis.com/auth/drive']
+#creds = ServiceAccountCredentials.from_json_keyfile_name('rpi_googlesheet.json', scope) # rpi_$
+#client = gspread.authorize(creds)
+#sheet = client.open('Remote Monitoring')  # Google Spreadsheet name 'Remote Monitoring'
+#worksheet = sheet.worksheet("Weather") # Worksheet name 'Weather'
