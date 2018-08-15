@@ -39,21 +39,17 @@ p_status = p.wait()
 
 #1534271542:26.05:56:21.00:77:i:i:i:i:i:i:i:i:1006.6:i:5:0:11:1.7:1.4:19.2:76
 DT,TIN,HIN,TOUT,HOUT,T2,H2,T3,H3,T4,H4,T5,H5,PRESS,UV,FC,STORM,WD,WS,WG,WC,RC = output.split(":")
-print "TIN: ", TIN
-print "HIN0: ", HIN
-print "TOUT: ", TOUT
-print "HOUT: ", HOUT
-print "PRESS: ", PRESS
-print "WIND DIRECTION: ", WD
-print "WIND SPEED: ", WS
-print "WIND GUST: ", WG
-print "WIND CHILL: ", WC
-print "RAIN COUNTER: ", RC
+TIN = float(TIN) #print "TIN: ", TIN
+HIN = float(HIN) #print "HIN0: ", HIN
+TOUT = float(TOUT) #print "TOUT: ", TOUT
+HOUT = float(HOUT) #print "HOUT: ", HOUT
+PRESS = float(PRESS) #print "PRESS: ", PRESS
+WD = float(WD) #print "WIND DIRECTION: ", WD
+WS = float(WS) #print "WIND SPEED: ", float(WS)
+WG = float(WG)*3.6 #print "WIND GUST: ", WG
+WC = float(WC) #print "WIND CHILL: ", WC
+RC = float(RC) #print "RAIN COUNTER: ", RC
 
-#needs to be tested
-#pi = 3.1415926
-#precision = 4
-#print( "{:.{}f}".format( pi, precision ) )
 
 #scope = ['https://spreadsheets.google.com/feeds','https://www.googleapis.com/auth/drive']
 #creds = ServiceAccountCredentials.from_json_keyfile_name('rpi_googlesheet.json', scope) # rpi_$
