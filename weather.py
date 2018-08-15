@@ -50,6 +50,11 @@ print "WIND GUST: ", WG
 print "WIND CHILL: ", WC
 print "RAIN COUNTER: ", RC
 
+#needs to be tested
+#pi = 3.1415926
+#precision = 4
+#print( "{:.{}f}".format( pi, precision ) )
+
 #scope = ['https://spreadsheets.google.com/feeds','https://www.googleapis.com/auth/drive']
 #creds = ServiceAccountCredentials.from_json_keyfile_name('rpi_googlesheet.json', scope) # rpi_$
 #client = gspread.authorize(creds)
