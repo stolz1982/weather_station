@@ -2,7 +2,10 @@
 
 sudo apt-get install python-pip libusb-dev gcc make vim git 
 
+sudo pip install --upgrade google-auth-oauthlib
+
 pip install gspread oauth2client (if you experience an error apply "export LC_ALL=C"
+
 
 
 make all (read below the instructions in detail)
