@@ -1,4 +1,13 @@
 # weather_station
+
+sudo apt-get install python-pip libusb-dev gcc make vim git 
+
+pip install gspread oauth2client (if you experience an error apply "export LC_ALL=C"
+
+
+make all (read below the instructions in detail)
+
+
 > 4. Weather Station (208,39€)
 >
 > apllication: http://te923.fukz.org/documentation.html
@@ -44,11 +53,7 @@ cd te923tool*
 #
 #
 #te923con: te923con.c te923con.h te923usb.c te923usb.h te923com.c te923com.h
-#	gcc -Wall  -o te923con te923con.c te923usb.c te923com.c -lusb#:wq!
+#	gcc -Wall  -o te923con te923con.c te923usb.c te923com.c -lusb
 
-make all
-export LC_ALL=C
-sudo apt-get install python-pip
-pip install gspread oauth2client
 
 
