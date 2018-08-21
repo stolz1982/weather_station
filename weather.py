@@ -62,6 +62,7 @@ TOUT = string_check(TOUT,f)
 HOUT = string_check(HOUT,f)
 PRESS = string_check(PRESS,f)
 FC = string_check(FC,i)
+print STORM
 
 if FC == 0:
 	FC_STR = "Heavy Snow"
