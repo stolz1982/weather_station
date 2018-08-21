@@ -3,9 +3,8 @@ import subprocess
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 from time import sleep, gmtime, strftime, localtime
-WORKDIR = "/home/administrator/weather_station/"
-
-command1 = '/home/administrator/weather_station/te923tool-0.6.1/te923con'
+WORKDIR = "/home/pi/weather_station/"
+command1 = '/home/pi/weather_station/te923tool-0.6.1/te923con'
 p = subprocess.Popen(command1, stdout=subprocess.PIPE, shell=True)
 (output, err) = p.communicate()
  
@@ -13,6 +12,19 @@ p = subprocess.Popen(command1, stdout=subprocess.PIPE, shell=True)
 p_status = p.wait()
 ##print "Command output : ", output
 ##print "Command exit status/return code : ", p_status 
+
+
+def string_check(parameter,typ,multiplier=1):
+    try:
+        if complex(parameter): # for int, long, float and complex
+            if typ == "f":
+                return float(parameter) * multiplier
+            elif typ == "i":
+                return int(parameter) * multiplier
+            else:
+                return "" 
+    except ValueError:
+        return ""
 
 ##-  T0    - temperature from internal sensor in C
 ##-  H0    - humidity from internal sensor in rel
@@ -38,14 +50,18 @@ p_status = p.wait()
 ##     5 - some clouds
 ##     6 - sunny
 
+f = "f" #FLOAT
+i = "i" #INTEGER
+
 #1534271542:26.05:56:21.00:77:i:i:i:i:i:i:i:i:1006.6:i:5:0:11:1.7:1.4:19.2:76
 DT,TIN,HIN,TOUT,HOUT,T2,H2,T3,H3,T4,H4,T5,H5,PRESS,UV,FC,STORM,WD,WS,WG,WC,RC = output.split(":")
-TIN = float(TIN)
-HIN = float(HIN) 
-TOUT = float(TOUT) 
-HOUT = float(HOUT)
-PRESS = float(PRESS)
-FC = float(FC)
+
+TIN = string_check(TIN,f)
+HIN = string_check(HIN,f)
+TOUT = string_check(TOUT,f)
+HOUT = string_check(HOUT,f)
+PRESS = string_check(PRESS,f)
+FC = string_check(FC,i)
 
 if FC == 0:
 	FC_STR = "Heavy Snow"
@@ -59,18 +75,20 @@ elif FC == 4:
 	FC_STR = "Cloudy"
 elif FC == 5:
 	FC_STR = "Some Clouds"
-else:
+elif FC == 6:
 	FC_STR = "Sunny"
+else:
+    FC_STR = ""
 
-WD = float(WD)*22.5 
-WS = float(WS)*3.6
-WG = float(WG)*3.6
-WC = float(WC)
-RC = float(RC)
+WD = string_check(WD,f,22.5)
+WS = string_check(WS,f,3.6)
+WG = string_check(WG,f,3.6)
+WC = string_check(WC,f)
+RC = string_check(RC,f)
 
 
 scope = ['https://spreadsheets.google.com/feeds','https://www.googleapis.com/auth/drive']
-creds = ServiceAccountCredentials.from_json_keyfile_name('/home/administrator/weather_station/weather_sheet.json', scope) # rpi_$
+creds = ServiceAccountCredentials.from_json_keyfile_name('/home/pi/weather_station/weather_sheet.json', scope) # rpi_$
 client = gspread.authorize(creds)
 sheet = client.open('Remote Monitoring')  # Google Spreadsheet name 'Remote Monitoring'
 worksheet = sheet.worksheet("Weather") # Worksheet name 'Weather'
