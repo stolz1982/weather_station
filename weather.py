@@ -16,7 +16,8 @@ p_status = p.wait()
 
 def string_check(parameter,typ,multiplier=1):
     try:
-        if complex(parameter): # for int, long, float and complex
+        if parameter.replace('.','',1).isdigit():
+        #if complex(parameter): # for int, long, float and complex
             if typ == "f":
                 return float(parameter) * multiplier
             elif typ == "i":
@@ -62,7 +63,6 @@ TOUT = string_check(TOUT,f)
 HOUT = string_check(HOUT,f)
 PRESS = string_check(PRESS,f)
 FC = string_check(FC,i)
-print STORM
 
 if FC == 0:
 	FC_STR = "Heavy Snow"
@@ -85,8 +85,7 @@ WD = string_check(WD,f,22.5)
 WS = string_check(WS,f,3.6)
 WG = string_check(WG,f,3.6)
 WC = string_check(WC,f)
-RC = string_check(RC,f)
-
+RC = string_check(RC.strip(),f) #wegen letzem Wert im zur√ck gelieferten string
 
 scope = ['https://spreadsheets.google.com/feeds','https://www.googleapis.com/auth/drive']
 creds = ServiceAccountCredentials.from_json_keyfile_name('/home/pi/weather_station/weather_sheet.json', scope) # rpi_$
