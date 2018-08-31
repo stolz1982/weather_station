@@ -85,15 +85,17 @@ WD = string_check(WD,f,22.5)
 WS = string_check(WS,f,3.6)
 WG = string_check(WG,f,3.6)
 WC = string_check(WC,f)
-RC = string_check(RC.strip(),f) #wegen letzem Wert im zur√ck gelieferten string
+RC = string_check(RC.strip(),f) #wegen letzem Wert im zurueck gelieferten string
 
 scope = ['https://spreadsheets.google.com/feeds','https://www.googleapis.com/auth/drive']
 creds = ServiceAccountCredentials.from_json_keyfile_name('/home/pi/weather_station/weather_sheet.json', scope) # rpi_$
 client = gspread.authorize(creds)
 sheet = client.open('Remote Monitoring')  # Google Spreadsheet name 'Remote Monitoring'
 worksheet = sheet.worksheet("Weather") # Worksheet name 'Weather'
-now = strftime("%d %b %Y %H:%M:%S", localtime()) # get current timestamp
+#now = strftime("%d %b %Y %H:%M:%S", localtime()) # get current timestamp
+now_date = strftime("%d.%m.%Y", localtime()) # get current timestamp
+now_time = strftime("%H:%M:%S", localtime()) # get current timestamp
 
-data_set = [now, TIN, HIN, TOUT, HOUT, PRESS, FC_STR, WD, WS, WG, WC, RC]      # data package to be sent to Google sheet
+data_set = [now_date, TIN, HIN, TOUT, HOUT, PRESS, FC_STR, WD, WS, WG, WC, RC, now_time]      # data package to be sent to Google sheet
 worksheet.append_row(data_set)  # append the targetted google sheet with the above data set
 
