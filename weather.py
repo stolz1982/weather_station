@@ -94,8 +94,8 @@ sheet = client.open('Remote Monitoring')  # Google Spreadsheet name 'Remote Moni
 worksheet = sheet.worksheet("Weather") # Worksheet name 'Weather'
 #now = strftime("%d %b %Y %H:%M:%S", localtime()) # get current timestamp
 now_date = strftime("%d.%m.%Y", localtime()) # get current timestamp
-now_time = strftime("%H:%M:%S", localtime()) # get current timestamp
+now = strftime("%d.%m.%Y %H:%M:%S", localtime()) # get current timestamp
 
-data_set = [now_date, TIN, HIN, TOUT, HOUT, PRESS, FC_STR, WD, WS, WG, WC, RC, now_time]      # data package to be sent to Google sheet
+data_set = [now, TIN, HIN, TOUT, HOUT, PRESS, FC_STR, WD, WS, WG, WC, RC, now_date]      # data package to be sent to Google sheet
 worksheet.append_row(data_set)  # append the targetted google sheet with the above data set
 
